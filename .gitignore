@@ -17,6 +17,7 @@ __pycache__/
 *.pyo
 
 CLAUDE.md
+*.pdf
 
 # Office / temp files
 *.docx
