@@ -1,22 +1,18 @@
-"""Phase 2, Section C — t-SNE of frozen-MOMENT embeddings (Checkpoint 1 deliverable).
+"""Phase 2, Section C — t-SNE of frozen-MOMENT embeddings (Checkpoint 1).
 
 Projects mean-pooled MOMENT embeddings of normal vs. the 5 SynCAN attack types to 2-D
-with t-SNE and saves a color-coded scatter to figures/tsne_embeddings.png. Purpose
-(CLAUDE.md Checkpoint 1): visually confirm normal/attack separation.
+with t-SNE and saves a color-coded scatter to figures/tsne_embeddings.png.
+Purpose: visually confirm normal/attack separation.
 
 6 balanced classes, 586 windows each:
   * normal    : 586 windows sampled (seed 42) from train_embeddings.npy   [--normal-source]
   * plateau, suppress, flooding, continuous, playback : the 5 attack test files (586 each)
 Each window's [64, 1024] patch embedding is mean-pooled over the 64 patches -> [1024].
 
-Embeddings live OUTSIDE the project (see memory/phase2-progress); the default --emb-dir
+Embeddings live OUTSIDE the project; the default --emb-dir
 points there. NOTE: Section B saved the test files as `test_<attack>_emb.npy` (not
 `_embeddings.npy`); this loader accepts either suffix.
 
-Manual run (from the Work Implementation folder):
-    py -3.14 src/tsne_plot.py
-    py -3.14 src/tsne_plot.py --normal-source test_normal      # use test_normal for 'normal'
-    py -3.14 src/tsne_plot.py --emb-dir "D:\some\path"         # override embeddings location
 """
 
 from __future__ import annotations

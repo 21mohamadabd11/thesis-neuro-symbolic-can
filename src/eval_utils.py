@@ -1,6 +1,6 @@
 """Evaluation metrics for CAN-bus anomaly detection (Phase 1).
 
-Four metrics used throughout the thesis evaluation (see CLAUDE.md § Evaluation Metrics):
+Four metrics used throughout the thesis evaluation:
 
     compute_auc_roc(scores, labels)              -> float
     compute_average_precision(scores, labels)    -> float
@@ -14,7 +14,7 @@ Convention
 * For ``compute_detection_delay`` the arrays must be in **temporal order**.
 
 Ranking metrics use scikit-learn; detection delay is a custom temporal metric
-("frames from attack start to first alert", CLAUDE.md).
+("frames from attack start to first alert").
 """
 
 from __future__ import annotations

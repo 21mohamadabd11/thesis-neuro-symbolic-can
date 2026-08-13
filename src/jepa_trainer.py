@@ -1,7 +1,7 @@
 """Phase 3, Section C — Stage-1 JEPA training loop.
 
 Trains the (trainable) MultiResolutionJEPA to predict masked MOMENT patch embeddings
-from context, on NORMAL traffic only (CLAUDE.md Stage 1). MOMENT is NOT loaded here — we
+from context, on NORMAL traffic only . MOMENT is NOT loaded here instead we
 train directly on the pre-extracted embeddings, so this is fast and MOMENT stays frozen
 by construction.
 
@@ -11,11 +11,8 @@ by construction.
   * optim  : Adam, lr=1e-3, weight_decay=1e-4.
   * output : best (lowest-val-loss) checkpoint -> experiments/jepa_checkpoint.pt.
 
-Embeddings live OUTSIDE the project (see memory/phase2-progress); --emb-dir defaults there.
+Embeddings live OUTSIDE the project; --emb-dir defaults there.
 
-Manual run (takes a while — 30 epochs over 12k windows on the GPU):
-    py -3.14 src/jepa_trainer.py --epochs 30
-    py -3.14 src/jepa_trainer.py --epochs 30 --batch-size 32 --lr 5e-4
 """
 
 from __future__ import annotations

@@ -1,30 +1,6 @@
-# Data files (too large for GitHub — download SynCAN from github.com/etas/SynCAN)
-data/syncan/*.zip
+﻿*.npy
+*.pt
 data/syncan/*.csv
-data/syncan/.cache/
-data/battery/
-data/cwru/
-
-# Embeddings (regenerate with: py -3.14 src/extract_embeddings.py)
-*.npy
-
-# Trained model weights
-experiments/canet_models/*.pt
-
-# Python cache
+data/syncan*.zip
 __pycache__/
 *.pyc
-*.pyo
-
-CLAUDE.md
-*.pdf
-
-# Office / temp files
-*.docx
-*.tmp
-.~lock.*
-failed_downloads.txt
-requirements.lock.txt
-
-# Jupyter
-.ipynb_checkpoints/

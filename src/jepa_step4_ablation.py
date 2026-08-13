@@ -8,12 +8,10 @@ the six-step ablation — no concept layer, no rules.
 Labelling (as specified for this step): the score of every window in an attack file is
 labelled 1, the normal validation windows labelled 0; AUC is computed per attack over
 [normal val scores | attack file scores].
-  NOTE: Step 1 in ablation_results.csv used the attack files' OWN per-window labels
-  (within-file). This step uses normal-val-vs-whole-attack-file instead — a slightly
+  NB: Step 1 in ablation_results.csv used the attack files' OWN per-window labels
+  (within-file). This step uses normal-val-vs-whole-attack-file instead which is a slightly
   different protocol (flagged; conclusion is unaffected given Section D's null result).
 
-Manual run:
-    py -3.14 src/jepa_step4_ablation.py
 """
 
 from __future__ import annotations

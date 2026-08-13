@@ -1,15 +1,15 @@
 """CANet-style baseline for SynCAN, evaluated at WINDOW level (Phase 1 baseline).
 
-  >>> Protocol note (read this) <<<
+  >>> Protocol note: <<<
   The CANet paper (Hanselmann 2020) reports plateau AUC ~0.982 / suppress ~0.743 on
-  the *raw per-message event stream*. This thesis evaluates everything at the
+  the *raw per-message event stream*.  Thesis evaluates everything at the
   window level the MOMENT pipeline consumes: 512-step windows on a 15 ms zero-order-
   hold grid, per-signal z-scored. Those two protocols are NOT comparable. A
   systematic study (memory/canet-stopcheck-findings) showed that at window level the
   attack difficulty even inverts: suppress is easy (>0.74) while plateau caps ~0.83,
   because the 15 ms ZOH grid already holds normal slow signals flat between updates,
   masking a plateau freeze, and 7.68 s windows dilute the ~46%-attack content.
-  Decision (with the author): use a COMMON window-level protocol so CANet and the
+  I will use a COMMON window-level protocol so CANet and the
   MOMENT method are compared apples-to-apples. The paper numbers below are shown for
   reference only; the STOP-CHECK bar is window-level.
 
@@ -24,12 +24,8 @@ per-window anomaly features (all fit on the normal validation set):
 A window's score is the max over its 20 signals. Threshold = 95th percentile on the
 normal validation set. Metrics via eval_utils, for all 5 attack types.
 
-Run it yourself:
-    python src/canet_baseline.py
-    python src/canet_baseline.py --epochs 5 --max-train-windows 4000   # quick smoke
-
 Models are saved to experiments/canet_models/ (one .pt per ID + meta.json).
-MOMENT is intentionally NOT used here — this is the classical baseline to beat.
+MOMENT NOT used here, this is the classical baseline to beat.
 """
 
 from __future__ import annotations

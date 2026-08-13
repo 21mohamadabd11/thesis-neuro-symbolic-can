@@ -1,29 +1,4 @@
-"""Phase 3, Section F — unit tests for the JEPA prediction module.
-
-Covers the two checks named in CLAUDE.md (Phase 3 deliverables) plus the module's
-structural contracts:
-
-  * NO gradient flows into MOMENT               -> test_no_gradient_into_moment (+ the
-                                                   structural no-import guard)
-  * prediction error vs. attacks                -> reframed, per Sections D/E, into:
-        4a  test_mechanism_error_rises_on_unpredictable_content   (synthetic, mechanism)
-        4b  test_null_result_regression_step4_auc                 (real data, regression)
-
-Why 4a + 4b instead of a literal ``error_normal < error_attack`` assertion:
-Sections D and E established that JEPA prediction error in MOMENT embedding space is a
-*null* anomaly signal (Step-4 AUC ~= 0.50; normal ~= attack ~= 6e-4). Asserting
-error_normal < error_attack would contradict our own validated result. Instead we (4a)
-prove the prediction-error *machinery* is directionally correct on controlled synthetic
-data, and (4b) lock the documented null result in as a regression band.
-
-Runs two ways (no new hard dependency):
-    py -3.14 tests/test_jepa.py                 # standalone runner, prints PASS/FAIL/SKIP
-    py -3.14 -m pytest tests/test_jepa.py -v    # if pytest is installed
-
-Test 4b needs the trained checkpoint (experiments/jepa_checkpoint.pt) and the six
-embedding files under C:\\Users\\moea0\\ThesisData\\embeddings\\; it SKIPS cleanly when
-they are absent, so the module-only tests always run offline.
-"""
+"""Phase 3, Section F — unit tests for the JEPA prediction module."""
 
 from __future__ import annotations
 

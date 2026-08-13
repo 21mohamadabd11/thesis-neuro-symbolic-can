@@ -19,8 +19,6 @@ than normal ones?
 Outputs: a verification table (✓ if attack mean error > normal mean error) and
 figures/prediction_error_curves.png (3 stacked subplots, one per branch, overlapping KDEs).
 
-Manual run:
-    py -3.14 src/jepa_inference.py
 """
 
 from __future__ import annotations

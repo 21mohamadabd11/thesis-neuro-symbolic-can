@@ -3,7 +3,7 @@
 A JEPA branch learns what NORMAL CAN traffic looks like in MOMENT embedding space by
 predicting masked patch embeddings from the surrounding (context) patches. High
 prediction error at inference = anomaly signal. All prediction happens in the 1024-d
-MOMENT embedding space — never in raw signal space (CLAUDE.md design decision #2).
+MOMENT embedding space — never in raw signal space.
 
 Section B: three parallel, independent branches over the same [B, 64, 1024] input, each
 masking a contiguous block of a different size to target a different attack timescale:

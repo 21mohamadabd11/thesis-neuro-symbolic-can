@@ -1,7 +1,7 @@
 """Phase 4, Section B — Stage-2 concept bottleneck training loop.
 
 Trains the K prototype vectors of the concept bottleneck (from concept_bottleneck.py) on
-NORMAL-traffic latents (Stage 2, CLAUDE.md). Everything upstream is FROZEN:
+NORMAL-traffic latents (Stage 2). Everything upstream is FROZEN:
   * MOMENT is never touched in this stage.
   * the PCA is FIXED — loaded from experiments/concept_pca.pkl (fitted in Section A).
   * only the K prototype vectors are trainable.
@@ -19,8 +19,6 @@ Unsupervised: NO attack labels in training. After training, concept_rarity is me
 normal val set and all 5 attack test sets as a PREVIEW of Step-5 separation, and the six
 per-window rarity arrays are saved for the Section-F Step-5 ablation.
 
-Manual run:
-    py -3.14 src/concept_bottleneck_trainer.py
 """
 
 from __future__ import annotations

@@ -3,7 +3,7 @@
 Wraps AutonLab/MOMENT-1-large (a pre-trained T5-based time-series transformer) as a
 FROZEN feature extractor. All parameters are frozen immediately after loading and a
 hard assertion guarantees zero trainable parameters — MOMENT is NEVER trained in this
-thesis (see CLAUDE.md key design decision #1).
+thesis.
 
     encoder = MOMENTEncoder()
     z = encoder(x)          # x: [B, 20, 512]  ->  z: [B, 64, 1024]  (patch embeddings)
@@ -16,7 +16,7 @@ Channel handling: MOMENT is channel-independent — a [B, 20, 512] input is proc
 over the 20 channels. (Flagged as a design choice — alternatives: keep channels, or
 concatenate — but the spec fixes the output at [B, 64, 1024].)
 
-Note: MOMENT-1-large is ~1.5 GB — the first run downloads and caches it (HuggingFace
+NB: MOMENT-1-large is ~1.5 GB — the first run downloads and caches it (HuggingFace
 cache). That is expected and one-time.
 """
 
@@ -51,7 +51,7 @@ class MOMENTEncoder(nn.Module):
         )
         self.moment.init()  # finalize model setup (per momentfm examples)
 
-        # ---- FREEZE everything immediately, then hard-verify (design decision #1) ----
+        # ---- FREEZE everything immediately, then hard-verify  ----
         for param in self.moment.parameters():
             param.requires_grad = False
         self.moment.eval().to(self.device)
@@ -105,7 +105,7 @@ class MOMENTEncoder(nn.Module):
 
 
 # --------------------------------------------------------------------------- #
-# Self-check (run manually: py -3.14 src/moment_encoder.py)
+# Self-check 
 # --------------------------------------------------------------------------- #
 if __name__ == "__main__":
     from syncan_dataloader import load_syncan

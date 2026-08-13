@@ -1,4 +1,4 @@
-"""SynCAN data loader for the neuro-symbolic CAN anomaly-detection thesis.
+"""SynCAN data loader for thesis.
 
 Turns the raw, *asynchronous* SynCAN CSVs (github.com/etas/SynCAN) into regular,
 z-scored, windowed multivariate tensors ready for the MOMENT encoder.
@@ -12,7 +12,7 @@ Ground truth verified from the real files (see memory/syncan-dataset-facts):
   * files: train_1..4 (all normal) + test_normal + 5 attack files
            (plateau, continuous, playback, suppress, flooding)
 
-Locked design:
+Design:
   * resample every signal onto a 15 ms grid with zero-order hold (ZOH)
   * W = 512 timesteps per window (64 patches @ patch_len 8, multiple of 8)
   * per-signal z-score using train_1..3 statistics (saved, reapplied to val/test)
@@ -23,9 +23,6 @@ Locked design:
 
 Raw resampled grids are cached to ``<data_dir>/.cache/`` as .npz so the expensive
 parse/resample runs only once; normalization is cheap and applied on load.
-
-Run ``python src/syncan_dataloader.py --quick`` for a fast end-to-end self-check on
-truncated reads, or without ``--quick`` for the full build + assertions.
 """
 
 from __future__ import annotations
@@ -102,7 +99,7 @@ class SynCANData:
     window: int = DEFAULT_WINDOW
 
     def as_core_tuple(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-        """CLAUDE.md-compatible ``(train_windows, test_windows, test_labels)``.
+        """``(train_windows, test_windows, test_labels)``.
 
         Test files are concatenated in ``TEST_FILES`` order.
         """
@@ -405,7 +402,7 @@ def build_training_windows(data_dir: Optional[str | Path] = None, dt_ms: int = D
 
 
 # --------------------------------------------------------------------------- #
-# Self-checks (embedded tests — the design's §8)
+# Self-checks (embedded tests)
 # --------------------------------------------------------------------------- #
 def _test_resample_synthetic() -> None:
     """ZOH + back-fill + label correctness on a tiny hand-checked example."""

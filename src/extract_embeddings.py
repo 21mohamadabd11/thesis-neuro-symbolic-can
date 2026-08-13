@@ -4,19 +4,16 @@ Step-1 ablation (MOMENT-only anomaly score = distance from the normal centroid).
 For each split we run the frozen MOMENT encoder over all windows in batches and save
 the full patch embeddings [N, 64, 1024] to data/syncan/embeddings/*.npy. The files are
 large (~5 GB total; train alone ~3.2 GB), so each is written incrementally to a
-memory-mapped .npy — nothing huge is held in RAM. The mean-over-patches vector
+memory-mapped .npy. The mean-over-patches vector
 [N, 1024] is accumulated on the fly for the ablation, so we never re-read the big files.
 
-Step 1 (CLAUDE.md six-step ablation, lower bound):
+Step 1 (Six-step ablation, lower bound):
   centroid = mean over training windows of their mean-pooled embedding   -> [1024]
   score(window) = L2 distance of its mean-pooled embedding from centroid
   AUC (eval_utils) vs labels, per attack -> written as the Step-1 row of
   experiments/ablation_results.csv.
 
-Manual run (takes a few minutes on GPU; MOMENT already cached from Section A):
-    py -3.14 src/extract_embeddings.py
-    py -3.14 src/extract_embeddings.py --batch-size 16        # if VRAM is tight
-    py -3.14 src/extract_embeddings.py --limit 96             # fast plumbing smoke -> embeddings_smoke/
+
 """
 
 from __future__ import annotations

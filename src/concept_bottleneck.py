@@ -1,14 +1,14 @@
-"""Phase 4, Section A — soft prototype (concept) bottleneck + initialisation.
+"""Phase 4, Section A: soft prototype (concept) bottleneck + initialisation.
 
-Pipeline position (CLAUDE.md): the bottleneck clusters the normal-traffic latent space into
+Pipeline position: the bottleneck clusters the normal-traffic latent space into
 K human-inspectable regimes. Each window is soft-assigned to the K prototypes;
 ``concept_rarity = 1 - max_k s_k`` is the Step-5 anomaly signal (0 = matches a known normal
 regime, ->1 = matches none).
 
-Why this exists / what Phase 3 proved: JEPA *prediction error* was a null anomaly signal
+ Phase 3 proved: JEPA *prediction error* was a null anomaly signal
 (Step-4 AUC ~= 0.50) because MOMENT patches are locally smooth and interpolate equally well
 on normal and attack windows. The hypothesis for Phase 4 is that the anomaly lives in the
-embedding VALUES, not their local predictability — so we cluster the embedding VALUES and
+embedding VALUES, not their local predictability, so we cluster the embedding VALUES and
 score how far a window falls from every learned normal prototype.
 
 Contents
@@ -17,7 +17,7 @@ Contents
 * ``extract_moment_latents`` — window latents for clustering: mean-pool the raw MOMENT patch
   embeddings [N, 64, 1024] -> [N, 1024], then PCA -> [N, 256]. The fitted PCA is returned
   (and optionally pickled) so the SAME projection is reused on val/test at inference.
-* ``calibrate_tau``         — data-driven softmax temperature (see design notes).
+* ``calibrate_tau``         — data-driven softmax temperature.
 
 Design notes
 ------------
